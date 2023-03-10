@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
 exports.connect = async () => {
-  const bdd = await mongoose.connect('mongodb://127.0.0.1:27017/Nodejs');
+  await mongoose.connect("mongodb://0.0.0.0:27017/hqml-db");
+  console.log("MongoDB connection set up");
 }
