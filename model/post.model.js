@@ -5,7 +5,6 @@ const Post = new Schema({
   content: String,
   author: String,
   date: Date,
-  picture: String,
   comments: [String]
 });
 
