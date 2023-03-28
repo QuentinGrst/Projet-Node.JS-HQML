@@ -1,4 +1,3 @@
-const userModel = require("../model/userjson.model");
 const User = require('../model/user.model');
 
 exports.getAll = (req, res, next) => {
