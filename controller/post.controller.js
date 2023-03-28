@@ -1,4 +1,4 @@
-export let DeletePost = undefined;
+
 const productModel = require("./../model/post.model");
 const jwt = require("jsonwebtoken");
 
@@ -47,3 +47,12 @@ exports.DeletePost = (req, res, next) => {
         });
 }
 
+exports.getAllPostsByUser = (req, res, next) => {
+  productModel.find({ userId: req.params.id })
+    .then(posts => {
+      res.status(200).json(posts);
+    })
+    .catch(error => {
+      res.status(400).json({ error: error });
+    });
+}
