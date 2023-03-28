@@ -1,3 +1,4 @@
+export let DeletePost = undefined;
 const productModel = require("./../model/post.model");
 const jwt = require("jsonwebtoken");
 
@@ -35,4 +36,14 @@ exports.modifyPost = (req, res, next) => {
     content: req.body.content,
     });
 };
+
+exports.DeletePost = (req, res, next) => {
+    productModel.deleteOne({ _id: req.params.id })
+        .then(() => {
+        res.status(200).json({ message: "Post supprimé" });
+        })
+        .catch(error => {
+        res.status(400).json({ error: error });
+        });
+}
 
