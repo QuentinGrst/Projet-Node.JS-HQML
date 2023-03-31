@@ -1,17 +1,17 @@
 
-const productModel = require("./../model/post.model");
+const postModel = require("./../model/post.model");
 const jwt = require("jsonwebtoken");
 
 exports.createPost = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
   const userId = decodedToken.id;
-  const post = new productModel({
+  const post = new postModel({
     content: req.body.content,})
 };
 
 exports.getAllPosts = (req, res, next) => {
-  productModel.find()
+  postModel.find()
     .then(posts => {
       res.status(200).json(posts);
     })
@@ -21,7 +21,7 @@ exports.getAllPosts = (req, res, next) => {
 }
 
 exports.getOnePost = (req, res, next) => {
-  productModel.findOne({ _id: req.params.id })
+  postModel.findOne({ _id: req.params.id })
     .then(post => {
       res.status(200).json(post);
     })
@@ -31,14 +31,14 @@ exports.getOnePost = (req, res, next) => {
 }
 
 exports.modifyPost = (req, res, next) => {
-  const post = new productModel({
+  const post = new postModel({
     _id: req.params.id,
     content: req.body.content,
     });
 };
 
 exports.DeletePost = (req, res, next) => {
-    productModel.deleteOne({ _id: req.params.id })
+    postModel.deleteOne({ _id: req.params.id })
         .then(() => {
         res.status(200).json({ message: "Post supprimé" });
         })
@@ -48,7 +48,7 @@ exports.DeletePost = (req, res, next) => {
 }
 
 exports.getAllPostsByUser = (req, res, next) => {
-  productModel.find({ userId: req.params.id })
+  postModel.find({ userId: req.params.id })
     .then(posts => {
       res.status(200).json(posts);
     })
