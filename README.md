@@ -1,5 +1,5 @@
 # Projet API NodeJS
-## Introduction
+## Introduction   
 Ce repository correspond au travail réalisé dans le cadre du projet de réseau social d'entreprise du cours "API NodeJS".
 
 L'équipe se compose des personnes suivantes : 
@@ -8,11 +8,11 @@ L'équipe se compose des personnes suivantes :
 - GRANSART Quentin
 - RIBREAU Lucas
 
-## Récupération du projet
+## Récupération du projet   
 Avant d'effectuer des modifications sur le projet, ne pas oublier de récupérer les dépendances via la commande `npm install`
 
 
-## Contrôleurs
+## Contrôleurs   
 
 L'API se compose de 3 contrôleurs distincts : 
 
@@ -22,11 +22,11 @@ L'API se compose de 3 contrôleurs distincts :
 - Utilisateurs : `user.controller.js`   
 
 ## Endpoints
-**Authentification**
+**Authentification**   
 `POST /auth/login` : Connexion   
 `POST /auth/signin` : Inscription   
 
-**Posts**
+**Posts**   
 `POST/post/` : Crée un post   
 `GET /post/` : Récupère tous les posts   
 `GET /post/<id>` : Récupère un post via son id   
@@ -34,11 +34,11 @@ L'API se compose de 3 contrôleurs distincts :
 `DELETE /post/<id>` : Supprime un post via son id   
 `GET /post/user/<id>` : Récupère tous les posts écrits par un utilisateur via son id  
 
-**Commentaires**
+**Commentaires**   
 `POST /post/<id>/comment` : Récupère les commentaires d'un post via son id   
 `DELETE /comment/<id>` : Supprime un commentaire via son id   
 
-**Utilisateurs**
+**Utilisateurs**   
 `GET /user/` : Récupère tous les utilisateurs     
 
 ## Utilisation de Postman
