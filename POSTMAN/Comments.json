@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "61eec9a3-39c6-4550-9431-9900df4c4fb5",
+		"name": "Comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25169379"
+	},
+	"item": [
+		{
+			"name": "Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhiZXJsZXVyQGdtYWlsLmNvbSIsImlkIjoiNjQyNmE0MTVjZWQxZjFmZjgyZjI1NTA5IiwiaWF0IjoxNjgwMjUzOTg3fQ.0ei9mX74v8aGqWQY6A8kI57JNTBLebDOyELvZu6B3rw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"First sur ce post\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/post/6426c88311112d4edbc00c0c/comment",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"6426c88311112d4edbc00c0c",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhiZXJsZXVyQGdtYWlsLmNvbSIsImlkIjoiNjQyNmE0MTVjZWQxZjFmZjgyZjI1NTA5IiwiaWF0IjoxNjgwMjUzOTg3fQ.0ei9mX74v8aGqWQY6A8kI57JNTBLebDOyELvZu6B3rw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/post//comment/6429e613ab9999d5ce21b7d5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"",
+						"comment",
+						"6429e613ab9999d5ce21b7d5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

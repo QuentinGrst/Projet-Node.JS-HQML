@@ -34,7 +34,7 @@ exports.login = (req, res, next) => {
                 email: finduser.email,
                 jwt: jwt.sign({
                   email: finduser.email,
-                  id: user._id
+                  id: finduser._id
                 }, process.env.JWT_TOKEN)
               });
             } else {

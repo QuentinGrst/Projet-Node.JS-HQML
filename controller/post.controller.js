@@ -1,58 +1,106 @@
 
-const postModel = require("./../model/post.model");
+const Post = require("./../model/post.model");
 const jwt = require("jsonwebtoken");
+const fs = require('fs');
 
 exports.createPost = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
-  const userId = decodedToken.id;
-  const post = new postModel({
-    content: req.body.content,})
+  try {
+    const post = req.body;
+    Post.create({
+      ...post,
+      picture: `${req.protocol}://${req.get("host")}/images/${req.body.picture}`,
+      authorId: req.token.id,
+      date: Date.now()
+    });
+    res.status(201).json({ message: "Post publié"});
+  }
+  catch(error) {
+    res.status(400).json({error: error});
+  }
 };
 
-exports.getAllPosts = (req, res, next) => {
-  postModel.find()
-    .then(posts => {
-      res.status(200).json(posts);
-    })
-    .catch(error => {
-      res.status(400).json({ error: error });
-    });
+exports.getAllPosts = async (req, res, next) => {
+  try {
+    const posts = await Post.find();
+
+    if(posts.length == 0) {
+      res.status(404).json({message: "Aucun posts trouvés"});
+    }
+    else {
+      res.status(201).json(posts);
+    }
+  }
+  catch(error) {
+    res.status(400).json({ error: error });
+  }
 }
 
-exports.getOnePost = (req, res, next) => {
-  postModel.findOne({ _id: req.params.id })
-    .then(post => {
+exports.getOnePost = async (req, res, next) => {
+  console.log("One post");
+  try {
+    const post = await Post.findOne({_id: req.params.id});
+    
+    if(post) {
       res.status(200).json(post);
-    })
-    .catch(error => {
-      res.status(404).json({ error: error });
-    });
+    }
+    else {
+      res.status(404).json({message: "Aucun post trouvé"});
+    }
+  }
+  catch (error) {
+    res.status(404).json({ error: error });
+  }
 }
 
-exports.modifyPost = (req, res, next) => {
-  const post = new postModel({
-    _id: req.params.id,
-    content: req.body.content,
-    });
+exports.modifyPost = async (req, res, next) => {
+  try {
+    const newPost = req.body;
+    const posts = await Post.find({_id: req.params.id});
+
+    if(posts.length == 0) {
+      res.status(404).json({message: "Le post à modifier n'existe pas"})
+    }
+    else {
+      if(req.token.id === posts.at(0).authorId) {
+      
+        const updateResult = await Post.findOneAndUpdate({_id: req.params.id}, newPost, {new: true});
+  
+        res.status(201).json({ message: "Le post a bien été modifé", result: updateResult});
+      }
+      else {
+        res.status(401).json({ message: "Vous n'êtes pas autorisé à modifier ce post"});
+      }
+    }    
+  }
+  catch(error) {
+    res.status(404).json({ error: error});
+  }
 };
 
-exports.DeletePost = (req, res, next) => {
-    postModel.deleteOne({ _id: req.params.id })
-        .then(() => {
-        res.status(200).json({ message: "Post supprimé" });
-        })
-        .catch(error => {
-        res.status(400).json({ error: error });
-        });
+exports.DeletePost = async (req, res, next) => {    
+  try {
+    const toDelete = await Post.find({_id: req.params.id});
+
+    if(toDelete.length == 0) {
+      res.status(404).json({ message: "Ce post n'existe pas"});
+    }
+    else {
+      const deleteResult = await Post.deleteOne({_id: req.params.id});
+      res.status(200).json({ message: "Le post a bien été supprimé", result: deleteResult});
+    }
+  }
+  catch(error) {
+    res.status(404).json({ error: error});
+  }
 }
 
-exports.getAllPostsByUser = (req, res, next) => {
-  postModel.find({ userId: req.params.id })
-    .then(posts => {
-      res.status(200).json(posts);
-    })
-    .catch(error => {
-      res.status(400).json({ error: error });
-    });
+exports.getAllPostsByUser = async (req, res, next) => {
+  try {
+    const posts = await Post.find({authorId: req.params.id});
+
+    res.status(200).json(posts);
+  }
+  catch(error) {
+    res.status(404).json({error: error});
+  }
 }

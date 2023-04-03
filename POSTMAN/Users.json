@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "66ecb2cc-31df-4e5d-bf11-15c87afcbc10",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25169379"
+	},
+	"item": [
+		{
+			"name": "All users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhiZXJsZXVyQGdtYWlsLmNvbSIsImlkIjoiNjQyNmE0MTVjZWQxZjFmZjgyZjI1NTA5IiwiaWF0IjoxNjgwMjUzOTg3fQ.0ei9mX74v8aGqWQY6A8kI57JNTBLebDOyELvZu6B3rw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/user/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

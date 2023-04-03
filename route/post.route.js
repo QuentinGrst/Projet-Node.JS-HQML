@@ -15,9 +15,7 @@ router.delete("/:id", auth, postController.DeletePost);
 router.get("/user/:id", auth, postController.getAllPostsByUser);
 
 // Routes pour les commentaires
-router.post("/:postId/comments", auth, commentController.createComment);
-router.get("/:postId/comments", auth, commentController.getAllComments);
-router.put("/:postId/comments/:commentId", auth, commentController.modifyComment);
-router.delete("/:postId/comments/:commentId", auth, commentController.deleteComment);
+router.post("/:postId/comment", auth, commentController.createComment);
+router.delete("/comment/:commentId", auth, commentController.deleteComment);
 
 module.exports = router;
